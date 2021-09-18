@@ -35,7 +35,7 @@ public class PriceTag
        }
        
        else{
-           return getDiscountedPrice() * COMMISSION_MULTIPLIER;
+           return getDiscountedPrice() - COMMISSION_MULTIPLIER;
        }
         
     }
