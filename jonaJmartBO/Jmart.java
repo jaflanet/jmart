@@ -14,11 +14,20 @@ public class Jmart
         System.out.println(getCommisionMultiplier());
         */
     }
-    
-    public static Product create (){
+ 
+ 
+    public static Product createProduct(){
         return null;
     }
-  /*  
+    
+    public static Coupon createCoupun(){
+        return null;
+    }
+    
+    public static ShipmentDuration ShipmentDuration(){
+        return null;
+    }
+    /* 
   public static int getPromo(){
       return 0;
   }
