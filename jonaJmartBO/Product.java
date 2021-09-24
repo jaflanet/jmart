@@ -9,7 +9,7 @@ package jonaJmartBO;
  */
 public class Product
 {
-    private static int idCounter;
+    private static int idCounter = 0;
     public int id;
     public String name;
     public int weight;
@@ -27,7 +27,8 @@ public class Product
         this.category=category;
         this.rating=new ProductRating();
         idCounter++;
-        this.id = idCounter;    
+        this.id = idCounter;
+        
     }
     
     

@@ -13,44 +13,40 @@ public class PriceTag
     public static final double BOTTOM_PRICE = 20000.0;
     public static final double BOTTOM_FEE = 1000.0;
     public double discount;
-    double price;
+    public double price;
     
     public PriceTag(double price){
-    this.price = price;
-    this.discount = 0.0;
+        this.price = price;
+        this.discount = 0.0;
     }
-
+    
     public PriceTag(double price, double discount){
-    this.price = price;
-    this.discount = discount; 
+        this.price = price;
+        this.discount = discount; 
     }
     
     public double getAdjustedPrice(){
-    return (double) getDiscountedPrice()+getAdminFee();
+        return (double) getDiscountedPrice()+getAdminFee();
     }
     
     public double getAdminFee(){
-          if(getDiscountedPrice()< BOTTOM_PRICE){
+        if(getDiscountedPrice()< BOTTOM_PRICE){
            return BOTTOM_FEE;
        }
-       
        else{
-           return getDiscountedPrice() - COMMISSION_MULTIPLIER;
+           return getDiscountedPrice() * COMMISSION_MULTIPLIER;
        }
-        
     }
     
     public double getDiscountedPrice(){
         if (discount > 100){
-            return 100.0;
+            discount = 100.0;
         }
-        
-        else if (discount == 100){
+        if (discount == 100){
             return 0.0;
         }
-        
         else {
-            return (double) price-(price*discount);
+            return  price * ((100.0 - discount)/100.0);
         }  
     }
 }

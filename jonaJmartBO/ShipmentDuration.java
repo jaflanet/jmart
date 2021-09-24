@@ -10,30 +10,34 @@ package jonaJmartBO;
 public class ShipmentDuration
 {
     public static final ShipmentDuration INSTANT = 
-    new ShipmentDuration (1 << 0);
+    new ShipmentDuration (1<<0);
     public static final ShipmentDuration SAME_DAY =
-    new ShipmentDuration (1 << 1);
+    new ShipmentDuration (1<<1);
     public static final ShipmentDuration NEXT_DAY = 
-    new ShipmentDuration (1 << 2);
+    new ShipmentDuration (1<<2);
     public static final ShipmentDuration REGULER = 
-    new ShipmentDuration (1 << 3);
-    public static final ShipmentDuration Kargo= 
-    new ShipmentDuration (1 << 4);
+    new ShipmentDuration (1<<3);
+    public static final ShipmentDuration Kargo = 
+    new ShipmentDuration (1<< 4);
     private final int bit;
 
     private ShipmentDuration(int bit){
         this.bit = bit; 
     }
     
-    public ShipmentDuration(int... args){
-        int flag = 0;
-        for (int i:args){
-        flag = flag|i;
+    public ShipmentDuration(ShipmentDuration ... args){
+        int  flag = 0;
+        for (ShipmentDuration  i:args){
+            flag = flag| i.bit;
         }
         this.bit = flag;
     }
     
     public boolean isDuration(ShipmentDuration shipmentDuration){
-        return false;
+        if((bit & shipmentDuration.bit) != 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
