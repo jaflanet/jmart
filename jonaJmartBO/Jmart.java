@@ -24,7 +24,7 @@ public class Jmart
         return null;
     }
     
-    public static ShipmentDuration ShipmentDuration(){
+    public static Shipment.Duration Duration(){
         return null;
     }
     /* 
