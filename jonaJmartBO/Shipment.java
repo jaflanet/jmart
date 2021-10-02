@@ -1,4 +1,7 @@
 package jonaJmartBO;
+import java.text.SimpleDateFormat; 
+import java.util.Date;
+import java.util.Calendar;
 
 
 /**
@@ -32,14 +35,32 @@ public class Shipment implements FileParser
     public static final Duration SAME_DAY = new Duration ((byte)(1<<1));
     public static final Duration NEXT_DAY = new Duration ((byte)(1<<2));
     public static final Duration REGULER =  new Duration ((byte)(1<<3));
-    public static final Duration Kargo =  new Duration ((byte) (1<< 4));
-    public byte bit;
+    public static final Duration KARGO =  new Duration ((byte) (1<< 4));
+    public final byte bit;
+    public static final SimpleDateFormat ESTIMATION_FORMAT 
+    = new SimpleDateFormat("E MMMM dd yyyy");
 
     private Duration(byte bit){
-        this.bit = bit; 
-    }
-    }
+        this.bit = bit;
+        }
     
+    public String getEstimatedArrival (Date reference){
+        if (this.bit == INSTANT.bit || this.bit == SAME_DAY.bit){
+            return ESTIMATION_FORMAT.format(reference);
+        }
+        
+        else if (this.bit == NEXT_DAY.bit){
+            return ESTIMATION_FORMAT.format(reference.getDay() + 1);
+        }
+        
+        else if (this.bit == REGULER.bit){
+            return ESTIMATION_FORMAT.format(reference.getDay() + 2);
+        }
+        else{
+            return ESTIMATION_FORMAT.format(reference.getDay() + 5); 
+        }
+        }
+    }
     public class MultiDuration{
     public byte bit;
     

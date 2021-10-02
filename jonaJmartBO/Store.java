@@ -1,5 +1,5 @@
 package jonaJmartBO;
-
+import java.util.regex.*;
 
 /**
  * Write a description of class Store here.
@@ -12,6 +12,8 @@ public class Store extends Recognizable implements FileParser
     public String name;
     public String address;
     public String phoneNumber;
+    public static final String REGEX_NAME = "^[A-Z](?!\\s{2}){4,20}$";
+    public static final String REGEX_PHONE = "[0-9]{9,12}$";
     
     public Store(int accountId, String name, String address, String phoneNumber){
     super(accountId);
@@ -25,6 +27,20 @@ public class Store extends Recognizable implements FileParser
     this.name = name ;
     this.address = address;
     this.phoneNumber = phoneNumber;
+    }
+    
+    public boolean validate (){
+    Pattern pattern_name = Pattern.compile(this.name);
+    Matcher matcher_name = pattern_name.matcher(REGEX_NAME);
+    Pattern pattern_phone = Pattern.compile(this.name);
+    Matcher matcher_phone = pattern_name.matcher(REGEX_PHONE);
+    
+    if (matcher_name.find() && matcher_phone.find()){
+        return true;
+    }
+    else {
+        return false;
+        }
     }
     
     @Override

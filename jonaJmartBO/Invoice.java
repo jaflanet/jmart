@@ -1,15 +1,15 @@
 package jonaJmartBO;
-
+import java.util.Date;
 
 /**
  * Abstract class Invoice - write a description of the class here
  *
- * @author (your name here)
+ * @author (Jonathan Aurelius)
  * @version (version number or date here)
  */
 public abstract class Invoice extends Recognizable implements FileParser
 {
-   public String date;
+   public Date date;
    public int buyerId;
    public int productId;
    public int complaintId;
@@ -37,7 +37,7 @@ public abstract class Invoice extends Recognizable implements FileParser
        super(id);
        this.buyerId = buyerId;
        this.productId = productId;
-       this.date = "OOP";
+       this.date = new Date();
        this.rating = Rating.NONE;
        this.status = Status.WAITING_CONFIRMATION;
     }
