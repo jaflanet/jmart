@@ -15,8 +15,8 @@ public class Jmart
         System.out.println(getAdminFee(1000));
         System.out.println(getCommisionMultiplier());
         */
-        System.out.println(Shipment.Duration.NEXT_DAY.getEstimatedArrival(new Date()));
-        Store store = new Store(6969, "athan", "RUMAHSaya", "09900988");
+        System.out.println(Shipment.Duration.SAME_DAY.getEstimatedArrival(new Date()));
+        Store store = new Store(6969, "jonathan", "RumahSaya", "09900988");
         System.out.println(store.validate());
         store.validate();
     }
