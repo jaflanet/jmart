@@ -30,12 +30,12 @@ public class Store extends Recognizable implements FileParser
     }
     
     public boolean validate (){
-    Pattern pattern_name = Pattern.compile(this.name);
-    Matcher matcher_name = pattern_name.matcher(REGEX_NAME);
-    Pattern pattern_phone = Pattern.compile(this.name);
-    Matcher matcher_phone = pattern_name.matcher(REGEX_PHONE);
+    Pattern patternname = Pattern.compile(this.name);
+    Matcher matchername = patternname.matcher(REGEX_NAME);
+    Pattern patternphone = Pattern.compile(this.name);
+    Matcher matcherphone = patternname.matcher(REGEX_PHONE);
     
-    if (matcher_name.find() && matcher_phone.find()){
+    if (matchername.find() && matcherphone.find()){
         return true;
     }
     else {
