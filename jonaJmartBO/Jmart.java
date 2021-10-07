@@ -15,22 +15,23 @@ public class Jmart
         System.out.println(getAdminFee(1000));
         System.out.println(getCommisionMultiplier());
         */
-        Account account = new Account(1, "supriyono", "supri..yono@ui.ac.id", "Supriyono123");
-        System.out.println(account.validate());
+//        Account account = new Account(1, "supriyono", "supri..yono@ui.ac.id", "Supriyono123");
+//        System.out.println(account.validate());
+	  System.out.print("Hello from eclipse");
     }
  
  
-    public static Product createProduct(){
-        return null;
-    }
-    
-    public static Coupon createCoupun(){
-        return null;
-    }
-    
-    public static Shipment.Duration Duration(){
-        return null;
-    }
+//    public static Product createProduct(){
+//        return null;
+//    }
+//    
+//    public static Coupon createCoupun(){
+//        return null;
+//    }
+//    
+//    public static Shipment.Duration Duration(){
+//        return null;
+//    }
     /* 
   public static int getPromo(){
       return 0;
