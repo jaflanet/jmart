@@ -7,7 +7,8 @@ package jonaJmartBO;
  * @author (your name)
  * @version (a version number or a date)
  */
-public abstract class Recognizable
+
+public class Recognizable implements Comparable <Recognizable>
 {
     public final int id;
     
@@ -28,7 +29,7 @@ public abstract class Recognizable
         return false;
     }
     
-    public boolean equals (Recognizable recognizable){
+    public boolean equals (Recognizable recognizable) {
         if(recognizable.id == this.id) {
             return true;
         }
@@ -36,4 +37,18 @@ public abstract class Recognizable
             return false;
         }
     }
+    
+    public static <T extends Recognizable> int setClosingId (Class<T> clazz,int id ) {
+    	return 0;
+    }
+    
+    public static <T extends Recognizable> int getClosingId (Class<T> clazz) {
+    	return 0;
+    }
+    
+    @Override
+    public int compareTo(Recognizable other) {
+    	return Integer.compare(id,other.id);
+    }
+    
 }

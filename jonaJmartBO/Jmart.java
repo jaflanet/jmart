@@ -17,7 +17,7 @@ public class Jmart
         */
 //        Account account = new Account(1, "supriyono", "supri..yono@ui.ac.id", "Supriyono123");
 //        System.out.println(account.validate());
-	  System.out.print("Hello from eclipse");
+	  System.out.print("Hello from eclipse!!");
     }
  
  
