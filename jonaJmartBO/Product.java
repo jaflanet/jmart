@@ -9,7 +9,7 @@ package jonaJmartBO;
  */
 public class Product extends Recognizable implements FileParser
 {
-    public int storeId;
+    public int accountId;
     public String name;
     public int weight;
     public boolean conditionUsed;
@@ -18,10 +18,9 @@ public class Product extends Recognizable implements FileParser
     public ProductRating rating;
     public Shipment.MultiDuration multiDuration;
     
-    public Product (int id, int storeId, String name, int weight, boolean conditionUsed,
+    public Product (int accountId, int storeId, String name, int weight, boolean conditionUsed,
     PriceTag priceTag, ProductCategory category, Shipment.MultiDuration multiDuration){
-        super(id);
-        this.storeId = storeId;
+        this.accountId = accountId;
         this.name = name;
         this.weight = weight;
         this.conditionUsed = conditionUsed;
@@ -29,17 +28,6 @@ public class Product extends Recognizable implements FileParser
         this.category = category;
         this.multiDuration = multiDuration;
         
-    }
-    
-    Product(int id, Store store, String name, int weight, boolean conditionUsed,
-    PriceTag priceTag, ProductCategory category){
-        super(id);
-        this.name = name;
-        this.weight = weight;
-        this.conditionUsed = conditionUsed;
-        this.priceTag = priceTag;
-        this.category = category;
-        this.rating = new ProductRating();
     }
     
     @Override
@@ -56,6 +44,6 @@ public class Product extends Recognizable implements FileParser
         "priceTag: "+ this.priceTag.price +" \n" +
         "category: "+ this.category +" \n" +
         "rating: "+ this.rating.getAverage() +" \n"+
-        "storeId: "+ this.storeId +" \n";
+        "storeId: "+ this.accountId +" \n";
     }
 }
