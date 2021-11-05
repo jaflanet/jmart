@@ -7,7 +7,7 @@ package jonaJmartBO;
  * @author (jonathan aurelius)
  * @version (12/09/21)
  */
-public class Coupon extends Recognizable implements FileParser 
+public class Coupon extends Recognizable
 {
     public final String name;
     public final int code;
@@ -61,8 +61,4 @@ public class Coupon extends Recognizable implements FileParser
         return (priceTag.getAdjustedPrice() - cut);
     }
     
-     @Override
-       public boolean read (String content){
-       return false;
-    }
 }

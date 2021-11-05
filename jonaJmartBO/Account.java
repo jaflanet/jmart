@@ -8,7 +8,7 @@ import java.util.regex.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Account extends Recognizable implements FileParser
+public class Account extends Recognizable
 {
    public String name ;
    public String email;
@@ -35,10 +35,6 @@ public class Account extends Recognizable implements FileParser
         }
     }
     
-   @Override
-       public boolean read (String content){
-       return false;
-    }
     
    @Override
     public String toString(){

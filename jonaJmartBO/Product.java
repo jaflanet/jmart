@@ -7,7 +7,7 @@ package jonaJmartBO;
  * @author (jonathan aurelius)
  * @version (18/9/21)
  */
-public class Product extends Recognizable implements FileParser
+public class Product extends Recognizable
 {
     public int accountId;
     public String name;
@@ -30,10 +30,6 @@ public class Product extends Recognizable implements FileParser
         
     }
     
-    @Override
-    public boolean read (String content){
-    return false;
-    }
     
     @Override
     public String toString(){

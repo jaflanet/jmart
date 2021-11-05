@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author (Jonathan Aurelius)
  * @version (version number or date here)
  */
-public abstract class Invoice extends Recognizable implements FileParser
+public abstract class Invoice extends Recognizable
 {
    public final Date date;
    public int buyerId;
@@ -50,9 +50,4 @@ public abstract class Invoice extends Recognizable implements FileParser
     }
     
    public abstract double getTotalPay();
-   
-   @Override
-    public boolean read(String content) {
-        return false;
-    }
 }

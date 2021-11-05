@@ -7,7 +7,7 @@ import java.util.regex.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Store extends Recognizable implements FileParser
+public class Store extends Recognizable
 {
     public String name;
     public String address;
@@ -41,10 +41,6 @@ public class Store extends Recognizable implements FileParser
         }
     }
     
-    @Override
-    public boolean read (String content){
-    return false;
-    }
     
     @Override
     public String toString(){

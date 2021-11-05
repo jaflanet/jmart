@@ -3,7 +3,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 
-public class Complaint extends Recognizable implements FileParser
+public class Complaint extends Recognizable
 {
     public String desc;
     public final Date date;
@@ -13,10 +13,6 @@ public class Complaint extends Recognizable implements FileParser
         this.date = new Date();
     }
     
-    @Override
-    public boolean read(String content){
-        return false;
-    }
     
     @Override
     public String toString(){
