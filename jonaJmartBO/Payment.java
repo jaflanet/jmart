@@ -11,9 +11,11 @@ public class Payment extends Invoice
 {
     public int productCount;
     public Shipment shipment;
-    public Payment(int id, int buyerId, int productId, Shipment shipment){
-        super(id, buyerId, 0);
+    
+    public Payment(int buyerId, int productId, int productCount,Shipment shipment){
+        super(buyerId, 0);
         this.shipment = shipment;
+        this.productCount = productCount;
     }
     @Override
     public double getTotalPay() {

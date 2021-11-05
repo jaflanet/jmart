@@ -4,8 +4,8 @@ package jonaJmartBO;
 /**
  * Write a description of class Recognizable here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jonathan Aurelius
+ * @version 02/11/21
  */
 
 public class Recognizable implements Comparable <Recognizable>

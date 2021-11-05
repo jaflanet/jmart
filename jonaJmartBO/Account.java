@@ -5,24 +5,26 @@ import java.util.regex.*;
 /**
  * Write a description of class Account here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jonathan Aurelius F
+ * @version 02/11/21
  */
 public class Account extends Recognizable
 {
    public String name ;
    public String email;
    public String password;
+   public double balance;
+   public Store store;
    public static final String REGEX_EMAIL = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
    
-   public Account(int id, String name, String email, String password){
+   public Account(String name, String email, String password){
     this.name = name;
     this.email = email;
     this.password = password;
     }
     
-       public boolean validate() {
+   public boolean validate() {
         Pattern emailPattern = Pattern.compile(REGEX_EMAIL);
         Matcher emailMatcher = emailPattern.matcher(this.email);
         Pattern passPattern = Pattern.compile(REGEX_PASSWORD);

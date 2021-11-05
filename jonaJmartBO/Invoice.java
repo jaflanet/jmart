@@ -41,12 +41,13 @@ public abstract class Invoice extends Recognizable
     public Status status;
     }
     
-   protected Invoice(int id,int productId, int buyerId){
+   protected Invoice(int buyerId, int productId){
        this.buyerId = buyerId;
        this.productId = productId;
        this.date = new Date();
        this.rating = Rating.NONE;
        this.status = Status.WAITING_CONFIRMATION;
+       this.complaintId = -1;
     }
     
    public abstract double getTotalPay();

@@ -35,8 +35,8 @@ public class Coupon extends Recognizable
         return this.used;
     }
     
-    public boolean canApply(PriceTag priceTag){
-        if(priceTag.getAdjustedPrice() >= minimum && used == false){
+    public boolean canApply(double price, double discount){
+        if(Treasury.getAdjustedPrice(price, discount) >= minimum && used == false){
             return true;
         }
         else {
@@ -44,21 +44,23 @@ public class Coupon extends Recognizable
         }
     }
     
-    public double apply(PriceTag priceTag){
+    public double apply(double price, double discount){
         this.used = true;
         if(type == Type.DISCOUNT){
             if(cut >= 100){
-                return (priceTag.getAdjustedPrice() - 
-                priceTag.getAdjustedPrice() * (100 / 100)); //cut max 100%
-            }else if(cut <= 0){
-                return (priceTag.getAdjustedPrice() - 
-                priceTag.getAdjustedPrice() * (0 / 100)); //cut min 0%
-            }else{
-                return (priceTag.getAdjustedPrice() - 
-                priceTag.getAdjustedPrice() * (cut / 100));
+                return (Treasury.getAdjustedPrice(price, discount) - 
+                		Treasury.getAdjustedPrice(price, discount) * (100 / 100)); //cut max 100%
+            }
+            else if(cut <= 0){
+                return (Treasury.getAdjustedPrice(price, discount) - 
+                		Treasury.getAdjustedPrice(price, discount) * (0 / 100)); //cut min 0%
+            }
+            else{
+                return (Treasury.getAdjustedPrice(price, discount) - 
+                		Treasury.getAdjustedPrice(price, discount) * (cut / 100));
             }  
         }
-        return (priceTag.getAdjustedPrice() - cut);
+        return (Treasury.getAdjustedPrice(price, cut) - cut);
     }
     
 }

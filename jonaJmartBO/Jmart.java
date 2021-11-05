@@ -13,7 +13,7 @@ public class Jmart{
     }
     
     public static void main(String[] args){
-        String filepath = "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart/city.json";
+        String filepath = "C:/Users/Jona/Desktop/KULIAH SEM 5/praktikum oop/modul 1/jmart/city.json";
         Gson gson = new Gson();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filepath));
