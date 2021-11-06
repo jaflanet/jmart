@@ -7,7 +7,7 @@ package jonaJmartBO;
  * @author (jonathan aurelius)
  * @version (12/09/21)
  */
-public class Coupon extends Recognizable
+public class Coupon extends Serializable
 {
     public final String name;
     public final int code;

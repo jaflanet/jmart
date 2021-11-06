@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author (Jonathan Aurelius)
  * @version (version number or date here)
  */
-public abstract class Invoice extends Recognizable
+public abstract class Invoice extends Serializable
 {
    public final Date date;
    public int buyerId;

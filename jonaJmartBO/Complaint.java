@@ -3,7 +3,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 
-public class Complaint extends Recognizable
+public class Complaint extends Serializable
 {
     public String desc;
     public final Date date;
