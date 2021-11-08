@@ -70,9 +70,9 @@ public class Jmart{
     
     public static List<Product> filterByCategory (List<Product>list,ProductCategory category){
     	List<Product> filtered = new ArrayList<>();
-        for (int c = 0; c < list.size(); c++) {
-            if(list.get(c).category == category) {
-                filtered.add(list.get(c));
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).category == category) {
+                filtered.add(list.get(i));
             }
         }
         return filtered;
