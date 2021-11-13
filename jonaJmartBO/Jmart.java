@@ -38,19 +38,34 @@ public class Jmart{
 //    	System.out.println("payment id:" + new Payment(-1, -1, -1, null).id);
 //    	System.out.println("payment id:" + new Payment(-1, -1, -1, null).id);
 //    	System.out.println("payment id:" + new Payment(-1, -1, -1, null).id);
-    	try{
-            List<Product> list = read("C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\randomProductList.json");
-//            List<Product> filtered = filterByPrice(list, 0.0, 20000.0);
-//            filtered.forEach(product -> System.out.println(product.price));
-//            List<Product> resultByName = filterByName(list, "gtx", 1, 5);
-//            resultByName.forEach(product -> System.out.println(product.name));
-            List<Product> resultByAccountId = filterByAccountId(list, 1, 1, 2);
-            resultByAccountId.forEach(product -> System.out.println(product.name));
+//    	try{
+//            List<Product> list = read("C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\randomProductList.json");
+////            List<Product> filtered = filterByPrice(list, 0.0, 20000.0);
+////            filtered.forEach(product -> System.out.println(product.price));
+////            List<Product> resultByName = filterByName(list, "gtx", 1, 5);
+////            resultByName.forEach(product -> System.out.println(product.name));
+//            List<Product> resultByAccountId = filterByAccountId(list, 1, 1, 2);
+//            resultByAccountId.forEach(product -> System.out.println(product.name));
+//
+//        }catch (Throwable t)
+//        {
+//            t.printStackTrace();
+//        }
+		try{
+			String filepath = "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\account.json" ;
 
-        }catch (Throwable t)
-        {
-            t.printStackTrace();
-        }
+			JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
+			tableAccount.add(new Account("jonathan", "jonathanfaren@gogo.com", "1234567j"));
+			tableAccount.writeJson();
+
+			tableAccount = new JsonTable<>(Account.class, filepath);
+			tableAccount.forEach(account -> System.out.println(account.toString()));
+		}
+
+		catch (Throwable t)
+		{
+			t.printStackTrace();
+		}
     }
     
     public static List<Product> read (String filepath){
