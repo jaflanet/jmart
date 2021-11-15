@@ -10,45 +10,38 @@ import java.util.ArrayList;
  */
 public abstract class Invoice extends Serializable
 {
-   public final Date date;
+   
    public int buyerId;
-   public int productId;
    public int complaintId;
+   public final Date date;
+   public int productId;
    public Rating rating;
-   public Status status;
-   public ArrayList<Record> history;
    
    public enum Rating {
         NONE,
+        GOOD,
         BAD,
-        NEUTRAL,
-        GOOD;
+        NEUTRAL;       
     }
 
    public enum Status {
-        WAITING_CONFIRMATION,
         CANCELLED,
-        ON_PROGRESS,
-        ON_DELIVERY,
         COMPLAINT,
+        DELIVERED,
+        FAILED,
         FINISHED,
-        FAILED; 
+        ON_DELIVERY,
+        ON_PROGRESS,
+        WAITING_CONFIRMATION; 
    }
-   
-   public class Record{
-    public Date date;
-    public String message;
-    public Status status;
-    }
     
    protected Invoice(int buyerId, int productId){
-       this.buyerId = buyerId;
+	   this.buyerId = buyerId;
        this.productId = productId;
        this.date = new Date();
        this.rating = Rating.NONE;
-       this.status = Status.WAITING_CONFIRMATION;
        this.complaintId = -1;
     }
     
-   public abstract double getTotalPay();
+   public abstract double getTotalPay(Product product);
 }
