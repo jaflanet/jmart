@@ -30,7 +30,6 @@ public class ObjectPoolThread<T> extends Thread {
 		while(!exitSignal){
             try{
                 synchronized(this){
-                    System.out.println("i");
                     for(T loop : objectPool){
                         routine.apply(loop);
                     }
