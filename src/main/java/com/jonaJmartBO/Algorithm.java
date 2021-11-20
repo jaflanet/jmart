@@ -1,6 +1,7 @@
 package com.jonaJmartBO;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Algorithm{
 	
@@ -367,6 +368,56 @@ public class Algorithm{
         return min;
     }
 	
-	
+	public static <T> List<T> paginate(T[] array, int page, int pageSize, Predicate<T> pred){
+        //Convert array to List
+        List<T> newList = new ArrayList<>();
+        for(T t : array){
+            newList.add(t);
+        }
+        try{
+            List<T> filteredList = newList.stream().filter(pred::predicate).collect(Collectors.toList());
+            int endIndex = (page * pageSize) + pageSize;
+            if(endIndex > filteredList.size()){
+                endIndex = filteredList.size();
+            }
+            return filteredList.subList((page * pageSize), endIndex);
+        }catch (Exception e){
+            return newList.subList(0 ,0);
+        }
+    }
+    public static <T> List<T> paginate(Iterable<T> iterable, int page, int pageSize, Predicate<T> pred){
+        //Convert array to List
+        List<T> newList = new ArrayList<>();
+        for(T t : iterable){
+            newList.add(t);
+        }
+        try{
+            List<T> filteredList = newList.stream().filter(pred::predicate).collect(Collectors.toList());
+            int endIndex = (page * pageSize) + pageSize;
+            if(endIndex > filteredList.size()){
+                endIndex = filteredList.size();
+            }
+            return filteredList.subList((page * pageSize), endIndex);
+        }catch (Exception e){
+            return newList.subList(0 ,0);
+        }
+    }
+    public static <T> List<T> paginate(Iterator<T> iterator, int page, int pageSize, Predicate<T> pred){
+        //Convert array to List
+        List<T> newList = new ArrayList<>();
+        while(iterator.hasNext()){
+            newList.add(iterator.next());
+        }
+        try{
+            List<T> filteredList = newList.stream().filter(pred::predicate).collect(Collectors.toList());
+            int endIndex = (page * pageSize) + pageSize;
+            if(endIndex > filteredList.size()){
+                endIndex = filteredList.size();
+            }
+            return filteredList.subList((page * pageSize), endIndex);
+        }catch (Exception e){
+            return newList.subList(0 ,0);
+        }
+    }
 }
 

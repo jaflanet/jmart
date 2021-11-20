@@ -35,7 +35,8 @@ public class Payment extends Invoice
     }
     
     @Override
-    public double getTotalPay(Product product) {
-        return 0.0;
+    public double getTotalPay(Product product){
+        return (productCount * Treasury.getAdjustedPrice(product.price, product.discount));
     }
+
 }

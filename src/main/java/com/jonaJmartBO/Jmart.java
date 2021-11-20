@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import com.google.gson.stream.JsonReader;
+import com.jonaJmartBO.dbjson.JsonDBEngine;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -20,28 +22,34 @@ public class Jmart{
 	public static long ON_PROGRESS_LIMIT_MS;
 	public static long WAITING_CONF_LIMIT_MS;
 	
-	public static void main(String[] args){
-		try {
-			SpringApplication.run(Jmart.class, args);
-//            String filepath = "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\json\\randomPaymentList.json";
-//            JsonTable<Payment> table = new JsonTable<>(Payment.class, filepath);
-//            ObjectPoolThread<Payment> paymentPool = new ObjectPoolThread<Payment>("Thread-PP", Jmart::paymentTimekeeper);
-//            paymentPool.start();
-//            table.forEach(payment -> paymentPool.add(payment));
-//            while(paymentPool.size() != 0);
-//            paymentPool.exit();
-//            while(paymentPool.isAlive());
-//            System.out.println("Thread exited successfully");
-//            Gson gson = new Gson();
-//            table.forEach(payment -> {
-//                String history = gson.toJson(payment.history);
-//                System.out.println(history);
-//            });
-            
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-	}
+	public static void main(String[] args) {
+        JsonDBEngine.Run(Jmart.class);
+        SpringApplication.run(Jmart.class, args);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> JsonDBEngine.join()));
+    }
+	
+//	public static void main(String[] args){
+//		try {
+//			SpringApplication.run(Jmart.class, args);
+////            String filepath = "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\json\\randomPaymentList.json";
+////            JsonTable<Payment> table = new JsonTable<>(Payment.class, filepath);
+////            ObjectPoolThread<Payment> paymentPool = new ObjectPoolThread<Payment>("Thread-PP", Jmart::paymentTimekeeper);
+////            paymentPool.start();
+////            table.forEach(payment -> paymentPool.add(payment));
+////            while(paymentPool.size() != 0);
+////            paymentPool.exit();
+////            while(paymentPool.isAlive());
+////            System.out.println("Thread exited successfully");
+////            Gson gson = new Gson();
+////            table.forEach(payment -> {
+////                String history = gson.toJson(payment.history);
+////                System.out.println(history);
+////            });
+//            
+//        } catch (Throwable t) {
+//            t.printStackTrace();
+//        }
+//	}
 	
 	public static boolean paymentTimekeeper(Payment payment) {
 		 Payment.Record record = payment.history.get(payment.history.size() - 1);

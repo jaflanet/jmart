@@ -1,5 +1,8 @@
 package com.jonaJmartBO;
 import java.util.Date;
+
+import com.jonaJmartBO.dbjson.Serializable;
+
 import java.util.ArrayList;
 
 /**

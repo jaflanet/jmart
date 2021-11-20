@@ -12,7 +12,7 @@ public class PhoneTopUp extends Invoice {
 	
     @Override
     public double getTotalPay(Product product) {
-        return 0.0;
+    	return Treasury.getAdjustedPrice(product.price, product.discount);
     }
 	
 }
