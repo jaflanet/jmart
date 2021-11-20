@@ -1,6 +1,7 @@
 package com.jonaJmartBO.controller;
 import com.jonaJmartBO.Account;
 import com.jonaJmartBO.Store;
+import com.jonaJmartBO.dbjson.JsonAutowired;
 import com.jonaJmartBO.dbjson.JsonTable;
 
 import java.util.regex.Pattern;
@@ -15,8 +16,9 @@ public class AccountController implements BasicGetController<Account>
 	 public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
 	 public static final Pattern REGEX_PATTERN_EMAIL = Pattern.compile(REGEX_EMAIL);
 	 public static final Pattern REGEX_PATTERN_PASSWORD = Pattern.compile(REGEX_PASSWORD);
+	 public static @JsonAutowired(filepath = "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\src\\main\\java\\com\\json\\account.json", value = Account.class)JsonTable<Account> accountTable;
 	 
-	 public static JsonTable<Account> accountTable;
+	 
 	 public JsonTable<Account> getJsonTable(){
 	        return accountTable;
 	    }

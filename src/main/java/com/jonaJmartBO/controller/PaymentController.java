@@ -2,8 +2,10 @@ package com.jonaJmartBO.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.jonaJmartBO.Account;
 import com.jonaJmartBO.ObjectPoolThread;
 import com.jonaJmartBO.Payment;
+import com.jonaJmartBO.dbjson.JsonAutowired;
 import com.jonaJmartBO.dbjson.JsonTable;
 
 public class PaymentController implements BasicGetController<Payment> {
@@ -12,8 +14,8 @@ public class PaymentController implements BasicGetController<Payment> {
     public static final long ON_DELIVERIY_LIMIT_MS = 0;
     public static final long ON_PROGRESS_LIMIT_MS = 0;
     public static final long WAITING_CONF_LIMIT_MS = 0;
-    public static JsonTable<Payment> paymentTable;
-    public static ObjectPoolThread<Payment> poolThread;
+    public static @JsonAutowired(filepath = "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\src\\main\\java\\com\\json\\randomPaymentList.json", value = Account.class)JsonTable<Payment> paymentTable;
+    public static ObjectPoolThread<Payment> poolThread = new ObjectPoolThread<Payment>(PaymentController::timekeeper);
     
     @PostMapping("/{id}/accept")
     public boolean accept(int id){
