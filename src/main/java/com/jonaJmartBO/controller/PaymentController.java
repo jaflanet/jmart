@@ -16,15 +16,15 @@ public class PaymentController implements BasicGetController<Payment> {
     public static ObjectPoolThread<Payment> poolThread;
     
     @PostMapping("/{id}/accept")
-    boolean accept(int id){
+    public boolean accept(int id){
         return false;
     }
     @PostMapping("/{id}/cancel")
-    boolean cancel(int id){
+    public boolean cancel(int id){
         return false;
     }
     @PostMapping("/create")
-    Payment create(int buyerId, int productId, int productCount, String shipmentAddress, byte shipmentPlan){
+    public Payment create(int buyerId, int productId, int productCount, String shipmentAddress, byte shipmentPlan){
 		return null;
     }
     
