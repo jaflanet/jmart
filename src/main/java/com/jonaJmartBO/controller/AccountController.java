@@ -7,6 +7,9 @@ import com.jonaJmartBO.dbjson.JsonTable;
 import java.util.regex.Pattern;
 
 import org.springframework.web.bind.annotation.*;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequestMapping("/account")
@@ -32,12 +35,26 @@ public class AccountController implements BasicGetController<Account>
 		@RequestParam String password
 	)
 	{
-        for(Account acc : accountTable){
-            if(acc.email.equals(email) && acc.password.equals(password)){
-                return acc;
+		try {
+            MessageDigest md;
+            md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(password.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
             }
+            for(Account account : accountTable){
+                if(account.email.equals(email) && account.password.equals(password)){
+                    return account;
+                }
+            }
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         return null;
+        
     }
 	
 	@PostMapping("/register")
@@ -53,7 +70,22 @@ public class AccountController implements BasicGetController<Account>
                     return null;
                 }
             }
-            return new Account(name, email, password, 0);
+            
+            try {
+                MessageDigest md;
+                md = MessageDigest.getInstance("MD5");
+                byte[] messageDigest = md.digest(password.getBytes());
+                BigInteger no = new BigInteger(1, messageDigest);
+                String hashtext = no.toString(16);
+                while (hashtext.length() < 32) {
+                    hashtext = "0" + hashtext;
+                }
+                return new Account(name, email, hashtext, 0);
+            } catch (NoSuchAlgorithmException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            
         }
         return null;
     }
