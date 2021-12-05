@@ -9,7 +9,7 @@ package com.jonaJmartBO;
  */
 public enum ProductCategory
 {
-    BOOK,
+	BOOK,
     KITCHEN,
     ELECTRONIC,
     FASHION,
@@ -19,7 +19,7 @@ public enum ProductCategory
     COSMETICS,
     HEALTHCARE,
     FURNITURE,
-    JEWELERY,
+    JEWELRY,
     TOYS,
     FNB,
     STATIONERY,
@@ -28,7 +28,7 @@ public enum ProductCategory
     PETCARE,
     ART_CRAFT,
     CARPENTRY,
-    MISSCELLANEOUS,
+    MISCELLANEOUS,
     PROPERTY,
     TRAVEL,
     WEDDING;

@@ -19,7 +19,7 @@ import com.jonaJmartBO.dbjson.JsonTable;
 @RequestMapping("/product")
 public class ProductController implements BasicGetController<Product>  {
 
-	public static @JsonAutowired(filepath = "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\src\\main\\java\\com\\json\\account.json", value = Product.class)JsonTable<Product>  productTable;
+	public static @JsonAutowired(filepath = "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\src\\main\\java\\com\\json\\randomProductList.json", value = Product.class)JsonTable<Product>  productTable;
 	
 	 @PostMapping("/create")
 	    Product register

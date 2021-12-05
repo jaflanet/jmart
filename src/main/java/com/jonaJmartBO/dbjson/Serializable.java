@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class Serializable implements Comparable<Serializable>
 {
-    private static HashMap<Class<?>, Integer> mapCounter = new HashMap<>();
+	private static HashMap<Class<?>, Integer> mapCounter = new HashMap<>();
     public final int id;
 
     protected Serializable()
