@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jonaJmartBO.Account;
 import com.jonaJmartBO.Algorithm;
+import com.jonaJmartBO.Payment;
+import com.jonaJmartBO.Predicate;
 import com.jonaJmartBO.Product;
 import com.jonaJmartBO.ProductCategory;
 import com.jonaJmartBO.dbjson.JsonAutowired;
@@ -19,70 +21,66 @@ import com.jonaJmartBO.dbjson.JsonTable;
 @RequestMapping("/product")
 public class ProductController implements BasicGetController<Product>  {
 
-	public static @JsonAutowired(filepath = "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\src\\main\\java\\com\\json\\randomProductList.json", value = Product.class)JsonTable<Product>  productTable;
-	
-	 @PostMapping("/create")
-	    Product register
-	    (
-	        @RequestParam int accountId,
-	        @RequestParam String name,
-	        @RequestParam int weight,
-	        @RequestParam boolean conditionUsed,
-	        @RequestParam double price,
-	        @RequestParam double discount,
-	        @RequestParam ProductCategory category,
-	        @RequestParam byte shipmentPlans
-	        
-	    )
-	    {
-		 AccountController controlA = new AccountController();
-	        JsonTable<Account> accountTable = controlA.getJsonTable();
-	        
-	        for(Account account : accountTable){
-	            if(account.id == accountId && account.store != null){
-	                return new Product(accountId, name, weight, conditionUsed, price, discount, category, shipmentPlans);
-	            }
-	        }
-	        return null;
-	    }
-	 
-	@Override
-	public JsonTable getJsonTable() {
-		// TODO Auto-generated method stub
-		return productTable;
-	}
-	
-	@GetMapping("/{id}/store")
-    List<Product> getProductByStore(
-    		@RequestParam int id,
-            @RequestParam int page,
-            @RequestParam int pageSize) {
-		
-		return Algorithm.paginate(productTable, page, pageSize,pred->pred.accountId == id);
-	}
-	
-	@GetMapping("/getProductFilter")
-	@ResponseBody
-    List<Product> getProductFilter(
-    		@RequestParam int page,
-            @RequestParam int pageSize,
-            @RequestParam int accountId,
-            @RequestParam String search,
-            @RequestParam int minPrice,
-            @RequestParam int maxPrice,
-            @RequestParam ProductCategory category ) {
-		
-		List<Product> productList = null;
-        for (Product list : productTable) {
-            if (list.accountId == accountId)
-                if (list.name.contains(search))
-                    if (minPrice <= list.price)
-                        if (maxPrice >= list.price)
-                            if (list.category == category)
-                                productList.add(list);
-        }
-        return productList;
-    }
-	
-	
+	public static @JsonAutowired(value= Product.class, filepath="C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\src\\main\\java\\com\\json\\randomProductList.json") JsonTable<Product> productTable;
+
+	//Get seller's products
+  	@GetMapping("/{id}/page")
+      @ResponseBody List<Product> getProducts(@PathVariable int id, @RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="1000") int pageSize){
+  		List<Product> productList = new ArrayList<>();
+          Account accountTarget = Algorithm.<Account>find(AccountController.accountTable,  a -> a.id == id);
+          if(accountTarget != null){
+              for(Product product : ProductController.productTable){
+                  for(Payment payment : PaymentController.paymentTable){
+                      if(payment.productId == product.id && product.accountId == accountTarget.id){
+                          productList.add(product);
+                      }
+                  }
+              }
+          }
+          return Algorithm.paginate(productList, page, pageSize, e->true);
+      }
+  	
+  	//Get product of seller's purchases
+      @GetMapping("/{id}/purchases/page")
+      @ResponseBody List<Product> getMyProducts(@PathVariable int id, @RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="1000") int pageSize){
+          List<Product> productList = new ArrayList<>();
+          List<Payment> paymentList = Algorithm.<Payment>paginate(PaymentController.paymentTable, page, pageSize, p -> p.buyerId == id);
+          for(Product product : getJsonTable()){
+              for(Payment payment : paymentList){
+                  if(payment.productId == product.id){
+                      productList.add(product);
+                  }
+              }
+          }
+          return Algorithm.<Product>paginate(productList, page, pageSize, e -> true);
+      }
+  	
+      @PostMapping("/create")
+      Product create(@RequestParam int accountId, @RequestParam String name, @RequestParam int weight, @RequestParam boolean conditionUsed, @RequestParam double price, @RequestParam double discount, @RequestParam ProductCategory category, @RequestParam byte shipmentPlans){
+          for(Account account : AccountController.accountTable){
+              if(account.id == accountId && account.store != null){
+                  Product newProduct = new Product(accountId, name, weight, conditionUsed, price, discount, category, shipmentPlans);
+                  productTable.add(newProduct);
+                  return newProduct;
+              }
+          }
+          return null;
+      }
+      public JsonTable<Product> getJsonTable() {
+          return productTable;
+      }
+      @GetMapping("/{id}/store")
+      List<Product> getProductByStore(@RequestParam int id, @RequestParam int page, @RequestParam int pageSize){
+          return Algorithm.<Product>paginate(getJsonTable(),page,pageSize, p -> (p.accountId == id));
+      }
+      @GetMapping("/getFiltered")
+      List<Product> getProductFiltered(@RequestParam(defaultValue="0")  int page, @RequestParam(defaultValue="5")  int pageSize,
+                                       @RequestParam  String search,
+                                       @RequestParam  int minPrice, @RequestParam  int maxPrice,
+                                       @RequestParam  ProductCategory category)
+      {
+          Predicate<Product> pred = p -> ((p.name.toLowerCase().contains(search.toLowerCase())) && (p.price >= minPrice && p.price <= maxPrice) && (p.category == category));
+          return Algorithm.<Product>paginate(getJsonTable(),page,pageSize, pred);
+      }
+    
 }

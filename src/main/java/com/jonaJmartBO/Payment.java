@@ -2,12 +2,7 @@ package com.jonaJmartBO;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Write a description of class Payment here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class Payment extends Invoice
 {
     public int productCount;
@@ -20,7 +15,7 @@ public class Payment extends Invoice
         this.productCount = productCount;
     }
     
-    public  static class Record {
+    public static class Record {
         public final Date date;
         public String massage;
         public Status status;
@@ -28,7 +23,7 @@ public class Payment extends Invoice
 
         public Record( Status status, String massage) {
             this.date = java.util.Calendar.getInstance().getTime();
-            this.status = Status.WAITING_CONFIRMATION;
+            this.status = status;
             this.massage = massage;
         }
 
