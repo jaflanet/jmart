@@ -18,17 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
 public interface BasicGetController<T extends Serializable> {
     
 	//melakukan get berdasarkan page yang diinginkan
+	/**
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
 	@GetMapping("/page")
     default @ResponseBody List<T> getPage(@RequestParam(defaultValue="1") int page, @RequestParam(defaultValue="5") int pageSize){
         return Algorithm.<T>paginate(getJsonTable(),page,pageSize,e -> true);
     }
 	
 	//melakukan get id
+    /**
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     default T getById(@PathVariable int id){
         return Algorithm.<T>find(getJsonTable(),(e) -> e.id == id);
     }
 
+    /**
+     * @return
+     */
     public abstract JsonTable<T> getJsonTable();
 }
 	

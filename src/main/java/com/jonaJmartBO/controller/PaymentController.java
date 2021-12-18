@@ -26,11 +26,17 @@ public class PaymentController implements BasicGetController<Payment> {
 	    public static final long ON_DELIVERY_LIMIT_MS = 1000;
 	    public static final long ON_PROGRESS_LIMIT_MS = 1000;
 	    public static final long WAITING_CONF_LIMIT_MS = 1000;
-	    public static @JsonAutowired(value = Payment.class, filepath =  "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\src\\main\\java\\com\\json\\PaymentList.json")
+	    public static @JsonAutowired(value = Payment.class, filepath =  "C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\src\\main\\java\\com\\json\\PaymentInvoice.json")
 	    JsonTable<Payment> paymentTable;
 	    public static ObjectPoolThread<Payment> poolThread = new ObjectPoolThread<Payment>("Thread", PaymentController::timekeeper);
 
 	    //invoice toko
+		/**
+		 * @param id
+		 * @param page
+		 * @param pageSize
+		 * @return
+		 */
 		@GetMapping("/{id}/page")
 	    @ResponseBody List<Payment> getInvoices(@PathVariable int id, @RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="1000") int pageSize){
 	        List<Payment> paymentList = new ArrayList<>();
@@ -48,12 +54,22 @@ public class PaymentController implements BasicGetController<Payment> {
 	    }
 
 	    //inovice dari barang yang sudah dibeli
+	    /**
+	     * @param id
+	     * @param page
+	     * @param pageSize
+	     * @return
+	     */
 	    @GetMapping("/{id}/purchases/page")
 	    @ResponseBody List<Payment> getMyInvoices(@PathVariable int id, @RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="1000") int pageSize){
 	        return Algorithm.<Payment>paginate(getJsonTable(), page, pageSize, p -> p.buyerId == id);
 	    }
 	    
 	    //melakukan accepet terhadap product yang dijual (toko)
+	    /**
+	     * @param id
+	     * @return
+	     */
 	    @PostMapping("/{id}/accept")
 	    boolean accept(@PathVariable int id) {
 	        for(Payment payment : paymentTable){
@@ -68,6 +84,10 @@ public class PaymentController implements BasicGetController<Payment> {
 	    }
 	    
 	  //melakukan accepet terhadap product yang dijual dan dibeli
+	    /**
+	     * @param id
+	     * @return
+	     */
 	    @PostMapping("/{id}/cancel")
 	    boolean cancel(@PathVariable int id) {
 	        for(Payment payment : paymentTable){
@@ -83,6 +103,14 @@ public class PaymentController implements BasicGetController<Payment> {
 	    
 	    //melakukan pembelian product
 
+	    /**
+	     * @param buyerId
+	     * @param productId
+	     * @param productCount
+	     * @param shipmentAddress
+	     * @param shipmentPlan
+	     * @return
+	     */
 	    @PostMapping("/create")
 	    Payment create(@RequestParam int buyerId, 
 	    				@RequestParam int productId, 
@@ -109,11 +137,17 @@ public class PaymentController implements BasicGetController<Payment> {
 	        return null;
 	    }
 
+	
 	    public JsonTable<Payment> getJsonTable() {
 	        return paymentTable;
 	    }
 
 	    //melakukan input no resi sehingga mengubah status menjadi dalam pengiriman
+	    /**
+	     * @param id
+	     * @param receipt
+	     * @return
+	     */
 	    @PostMapping("/{id}/submit")
 	    boolean submit(@PathVariable int id, String receipt) {
 	        for(Payment payment : paymentTable){
@@ -130,6 +164,10 @@ public class PaymentController implements BasicGetController<Payment> {
 	        return false;
 	    }
 
+	    /**
+	     * @param payment
+	     * @return
+	     */
 	    private static Boolean timekeeper(Payment payment) {
 	        if (payment.history.isEmpty()) {
 	            return false;

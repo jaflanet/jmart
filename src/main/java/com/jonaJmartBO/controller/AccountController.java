@@ -29,6 +29,11 @@ public class AccountController implements BasicGetController<Account>
 	        return accountTable;
 	    }
 
+	    /**
+	     * @param email
+	     * @param password
+	     * @return
+	     */
 	    @PostMapping("/login")
 	    Account login
 	            (
@@ -56,6 +61,12 @@ public class AccountController implements BasicGetController<Account>
 	        return null;
 	    }
 
+	    /**
+	     * @param name
+	     * @param email
+	     * @param password
+	     * @return
+	     */
 	    @PostMapping("/register")
 	    Account register
 	            (
@@ -89,6 +100,13 @@ public class AccountController implements BasicGetController<Account>
 	    }
 	    
 	    //method untuk melakukan pembuatan store
+	    /**
+	     * @param id
+	     * @param name
+	     * @param address
+	     * @param phoneNumber
+	     * @return
+	     */
 	    @PostMapping("/{id}/registerStore")
 	    Store registerStore(
 	      @PathVariable int id,
@@ -102,6 +120,11 @@ public class AccountController implements BasicGetController<Account>
 	    }
 	    
 	    //method untuk melakukan top up
+	    /**
+	     * @param id
+	     * @param balance
+	     * @return
+	     */
 	    @PostMapping("/{id}/topUp")
 	    Account topUp(@PathVariable int id, @RequestParam double balance){
 	     Account acc = Algorithm.<Account>find(getJsonTable(), (account -> account.id == id));

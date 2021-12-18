@@ -22,6 +22,12 @@ public class Algorithm{
 	        }
 	        return list;
 	    }
+	    /**
+	     * @param <T>
+	     * @param iterable
+	     * @param value
+	     * @return
+	     */
 	    public static <T> List<T> collect(Iterable<T> iterable, T value) {
 	        List<T> list = new ArrayList<T>();
 	        for(T t : iterable){
@@ -50,6 +56,12 @@ public class Algorithm{
 	        }
 	        return list;
 	    }
+	    /**
+	     * @param <T>
+	     * @param iterable
+	     * @param pred
+	     * @return
+	     */
 	    public static <T> List<T> collect(Iterable<T> iterable, Predicate<T> pred) {
 	        List<T> list = new ArrayList<T>();
 	        for(T t : iterable){
@@ -59,6 +71,12 @@ public class Algorithm{
 	        }
 	        return list;
 	    }
+	    /**
+	     * @param <T>
+	     * @param iterator
+	     * @param pred
+	     * @return
+	     */
 	    public static <T> List<T> collect(Iterator<T> iterator, Predicate<T> pred) {
 	        List<T> list = new ArrayList<T>();
 	        while(iterator.hasNext()){
