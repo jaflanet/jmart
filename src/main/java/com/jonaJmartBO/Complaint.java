@@ -5,6 +5,10 @@ import com.jonaJmartBO.dbjson.Serializable;
 
 import java.text.SimpleDateFormat;
 
+/**
+ * @author Jona
+ * @version 18/12/21
+ */
 
 public class Complaint extends Serializable
 {

@@ -7,6 +7,7 @@ package com.jonaJmartBO;
  * @author (jonathan aurelius)
  * @version (18/9/21)
  */
+
 public class Treasury
 {
     public static final double COMMISSION_MULTIPLIER = 0.05;

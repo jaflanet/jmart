@@ -13,6 +13,11 @@ import com.jonaJmartBO.*;
 import com.jonaJmartBO.dbjson.JsonAutowired;
 import com.jonaJmartBO.dbjson.JsonTable;
 
+/**
+ * @author Jona
+ * @version 18/12/21
+ */
+
 @RestController
 @RequestMapping("/payment")
 public class PaymentController implements BasicGetController<Payment> {
@@ -25,7 +30,7 @@ public class PaymentController implements BasicGetController<Payment> {
 	    JsonTable<Payment> paymentTable;
 	    public static ObjectPoolThread<Payment> poolThread = new ObjectPoolThread<Payment>("Thread", PaymentController::timekeeper);
 
-	    //Get invoices of seller's products
+	    //invoice toko
 		@GetMapping("/{id}/page")
 	    @ResponseBody List<Payment> getInvoices(@PathVariable int id, @RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="1000") int pageSize){
 	        List<Payment> paymentList = new ArrayList<>();
@@ -42,12 +47,13 @@ public class PaymentController implements BasicGetController<Payment> {
 	        return Algorithm.paginate(paymentList, page, pageSize, e->true);
 	    }
 
-	    //Get invoices of seller's purchases
+	    //inovice dari barang yang sudah dibeli
 	    @GetMapping("/{id}/purchases/page")
 	    @ResponseBody List<Payment> getMyInvoices(@PathVariable int id, @RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="1000") int pageSize){
 	        return Algorithm.<Payment>paginate(getJsonTable(), page, pageSize, p -> p.buyerId == id);
 	    }
-
+	    
+	    //melakukan accepet terhadap product yang dijual (toko)
 	    @PostMapping("/{id}/accept")
 	    boolean accept(@PathVariable int id) {
 	        for(Payment payment : paymentTable){
@@ -60,7 +66,8 @@ public class PaymentController implements BasicGetController<Payment> {
 	        }
 	        return false;
 	    }
-
+	    
+	  //melakukan accepet terhadap product yang dijual dan dibeli
 	    @PostMapping("/{id}/cancel")
 	    boolean cancel(@PathVariable int id) {
 	        for(Payment payment : paymentTable){
@@ -73,6 +80,8 @@ public class PaymentController implements BasicGetController<Payment> {
 	        }
 	         return false;
 	    }
+	    
+	    //melakukan pembelian product
 
 	    @PostMapping("/create")
 	    Payment create(@RequestParam int buyerId, 
@@ -82,12 +91,10 @@ public class PaymentController implements BasicGetController<Payment> {
 	    				@RequestParam byte shipmentPlan) {
 	        for(Account account : AccountController.accountTable){
 	            if(account.id == buyerId){
-	            	System.out.println("masuk3");
 	                for(Product productSingular : ProductController.productTable){
 	                    if(productSingular.id == productId){
 	                        Payment newPayment = new Payment(buyerId, productId, productCount, new Shipment(shipmentAddress, 0, shipmentPlan, null));
 	                        double totalPay = newPayment.getTotalPay(productSingular);
-	                        System.out.println("masuk");
 	                        if(account.balance >= totalPay){
 	                            account.balance -= totalPay;
 	                            newPayment.history.add(new Payment.Record(Invoice.Status.WAITING_CONFIRMATION, "WAITING_CONFIRMATION"));
@@ -96,16 +103,9 @@ public class PaymentController implements BasicGetController<Payment> {
 	                            return newPayment;
 	                        }
 	                    }
-//	                    else {
-//	                    	System.out.println(productSingular.id);
-//	                    	System.out.println(productId);
-//	                    }
 	                }
 	            }
 	        }
-//	        Payment newPayment = new Payment(buyerId, productId, productCount, new Shipment(shipmentAddress, 0, shipmentPlan, null));
-//            double totalPay = newPayment.getTotalPay(ProductController.productTable.get(1));
-	        System.out.println("masuk2");
 	        return null;
 	    }
 
@@ -113,6 +113,7 @@ public class PaymentController implements BasicGetController<Payment> {
 	        return paymentTable;
 	    }
 
+	    //melakukan input no resi sehingga mengubah status menjadi dalam pengiriman
 	    @PostMapping("/{id}/submit")
 	    boolean submit(@PathVariable int id, String receipt) {
 	        for(Payment payment : paymentTable){

@@ -2,11 +2,10 @@ package com.jonaJmartBO;
 
 
 /**
- * Enumeration class ProductCategory - write a description of the enum class here
- *
- * @author (jonathan aurelius)
- * @version (18/9/21)
+ * @author Jona
+ * @version 18/12/21
  */
+
 public enum ProductCategory
 {
 	BOOK,

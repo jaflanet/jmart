@@ -2,11 +2,10 @@ package com.jonaJmartBO;
 import java.util.regex.*;
 
 /**
- * Write a description of class Store here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jona
+ * @version 18/12/21
  */
+
 public class Store
 {
     public String name;

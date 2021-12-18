@@ -3,11 +3,10 @@ package com.jonaJmartBO;
 import com.jonaJmartBO.dbjson.Serializable;
 
 /**
- * Write a description of class Product here.
- *
- * @author (jonathan aurelius)
- * @version (18/9/21)
+ * @author Jona
+ * @version 18/12/21
  */
+
 public class Product extends Serializable
 {
     public int accountId;

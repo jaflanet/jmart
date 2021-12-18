@@ -3,6 +3,11 @@ package com.jonaJmartBO;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * @author Jona
+ * @version 18/12/21
+ */
+
 public class Algorithm{
 	 private Algorithm() {
 	    }

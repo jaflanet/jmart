@@ -10,6 +10,11 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * @author Jona
+ * @version 18/12/21
+ */
+
 @RestController
 @RequestMapping("/account")
 public class AccountController implements BasicGetController<Account>
@@ -82,7 +87,8 @@ public class AccountController implements BasicGetController<Account>
 	        }
 	        return null;
 	    }
-
+	    
+	    //method untuk melakukan pembuatan store
 	    @PostMapping("/{id}/registerStore")
 	    Store registerStore(
 	      @PathVariable int id,
@@ -94,12 +100,12 @@ public class AccountController implements BasicGetController<Account>
 	     acc.store = new Store(name, address, phoneNumber, 0);
 	     return acc.store;
 	    }
-
+	    
+	    //method untuk melakukan top up
 	    @PostMapping("/{id}/topUp")
 	    Account topUp(@PathVariable int id, @RequestParam double balance){
 	     Account acc = Algorithm.<Account>find(getJsonTable(), (account -> account.id == id));
 	     acc.balance += balance;
 	     return acc;
-	   //  return Algorithm.<Account>exists(getJsonTable(), (account -> account.id == id));
 	    }
 }

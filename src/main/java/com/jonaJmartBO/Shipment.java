@@ -5,10 +5,8 @@ import java.util.Calendar;
 
 
 /**
- * Write a description of class Shipment here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Jona
+ * @version 18/12/21
  */
 public class Shipment
 {

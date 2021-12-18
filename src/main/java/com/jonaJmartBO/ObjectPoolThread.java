@@ -2,6 +2,11 @@ package com.jonaJmartBO;
 import java.util.*;
 import java.util.function.Function;
 
+/**
+ * @author Jona
+ * @version 18/12/21
+ */
+
 public class ObjectPoolThread<T> extends Thread {
 	
 	private boolean exitSignal = false;

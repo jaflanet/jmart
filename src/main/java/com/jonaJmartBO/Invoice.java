@@ -6,17 +6,15 @@ import com.jonaJmartBO.dbjson.Serializable;
 import java.util.ArrayList;
 
 /**
- * Abstract class Invoice - write a description of the class here
- *
- * @author (Jonathan Aurelius)
- * @version (version number or date here)
+ * @author Jona
+ * @version 18/12/21
  */
+
 public abstract class Invoice extends Serializable
 {
 	 public int buyerId;
 	    public int complaintId;
 	    public final Date date;
-//	    public ArrayList<Record> history = new ArrayList<>();
 	    public int productId;
 	    public Rating rating;
 	    public enum Status{

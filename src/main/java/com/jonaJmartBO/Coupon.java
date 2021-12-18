@@ -3,11 +3,10 @@ package com.jonaJmartBO;
 import com.jonaJmartBO.dbjson.Serializable;
 
 /**
- * Write a description of class Coupon here.
- *
- * @author (jonathan aurelius)
- * @version (12/09/21)
+ * @author Jona
+ * @version 18/12/21
  */
+
 public class Coupon extends Serializable
 {
     public final String name;

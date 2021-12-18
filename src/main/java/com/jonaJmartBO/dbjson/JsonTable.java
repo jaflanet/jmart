@@ -6,6 +6,12 @@ import java.lang.reflect.Array;
 import com.google.gson.*;
 import com.google.gson.stream.*;
 
+
+/**
+ * @author Jona
+ * @version 18/12/21
+ */
+
 public class JsonTable<T> extends Vector<T>
 {
 	public final String filepath;

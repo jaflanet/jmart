@@ -17,13 +17,18 @@ import com.jonaJmartBO.ProductCategory;
 import com.jonaJmartBO.dbjson.JsonAutowired;
 import com.jonaJmartBO.dbjson.JsonTable;
 
+/**
+ * @author Jona
+ * @version 18/12/21
+ */
+
 @RestController
 @RequestMapping("/product")
 public class ProductController implements BasicGetController<Product>  {
 
 	public static @JsonAutowired(value= Product.class, filepath="C:\\Users\\Jona\\Desktop\\KULIAH SEM 5\\praktikum oop\\modul 1\\jmart\\src\\main\\java\\com\\json\\randomProductList.json") JsonTable<Product> productTable;
 
-	//Get seller's products
+	//mendapatkan procut yang ada di toko
   	@GetMapping("/{id}/page")
       @ResponseBody List<Product> getProducts(@PathVariable int id, @RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="1000") int pageSize){
   		List<Product> productList = new ArrayList<>();
@@ -40,7 +45,7 @@ public class ProductController implements BasicGetController<Product>  {
           return Algorithm.paginate(productList, page, pageSize, e->true);
       }
   	
-  	//Get product of seller's purchases
+  	//get product yang sudah di beli
       @GetMapping("/{id}/purchases/page")
       @ResponseBody List<Product> getMyProducts(@PathVariable int id, @RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="1000") int pageSize){
           List<Product> productList = new ArrayList<>();
@@ -54,7 +59,9 @@ public class ProductController implements BasicGetController<Product>  {
           }
           return Algorithm.<Product>paginate(productList, page, pageSize, e -> true);
       }
-  	
+      
+      
+  		//menambahkan produk pada toko
       @PostMapping("/create")
       Product create(@RequestParam int accountId, @RequestParam String name, @RequestParam int weight, @RequestParam boolean conditionUsed, @RequestParam double price, @RequestParam double discount, @RequestParam ProductCategory category, @RequestParam byte shipmentPlans){
           for(Account account : AccountController.accountTable){
@@ -69,10 +76,14 @@ public class ProductController implements BasicGetController<Product>  {
       public JsonTable<Product> getJsonTable() {
           return productTable;
       }
+      
+      
       @GetMapping("/{id}/store")
       List<Product> getProductByStore(@RequestParam int id, @RequestParam int page, @RequestParam int pageSize){
           return Algorithm.<Product>paginate(getJsonTable(),page,pageSize, p -> (p.accountId == id));
       }
+      
+      //melakukan filter search
       @GetMapping("/getFiltered")
       List<Product> getProductFiltered(@RequestParam(defaultValue="0")  int page, @RequestParam(defaultValue="5")  int pageSize,
                                        @RequestParam  String search,

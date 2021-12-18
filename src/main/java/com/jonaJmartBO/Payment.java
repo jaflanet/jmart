@@ -2,6 +2,10 @@ package com.jonaJmartBO;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * @author Jona
+ * @version 18/12/21
+ */
 
 public class Payment extends Invoice
 {
